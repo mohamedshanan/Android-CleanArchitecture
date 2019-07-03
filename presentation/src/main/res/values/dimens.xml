@@ -5,6 +5,7 @@
 
   <!--User Header stuff-->
   <dimen name="header_text_size">26sp</dimen>
+    <dimen name="normal_text_size">16sp</dimen>
   <dimen name="header_margin">5dp</dimen>
   <dimen name="iv_cover_height">140dp</dimen>
 

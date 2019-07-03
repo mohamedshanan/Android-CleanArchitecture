@@ -17,8 +17,8 @@ package com.masary.anamasary.test.exception;
 
 import android.test.AndroidTestCase;
 
-import com.masary.anamasary.data.exception.NetworkConnectionException;
-import com.masary.anamasary.data.exception.UserNotFoundException;
+import com.masary.anamasary.data._exception.NetworkConnectionException;
+import com.masary.anamasary.data._exception.UserNotFoundException;
 import com.masary.anamasary.presentation.R;
 import com.masary.anamasary.presentation.exception.ErrorMessageFactory;
 
@@ -41,7 +41,7 @@ public class ErrorMessageFactoryTest extends AndroidTestCase {
   }
 
   public void testUserNotFoundErrorMessage() {
-    String expectedMessage = getContext().getString(R.string.exception_message_user_not_found);
+    String expectedMessage = getContext().getString(R.string.exception_message_key_not_found);
     String actualMessage = ErrorMessageFactory.create(getContext(), new UserNotFoundException());
 
     assertThat(actualMessage, is(equalTo(expectedMessage)));

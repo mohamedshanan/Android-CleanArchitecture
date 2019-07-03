@@ -4,26 +4,26 @@
  */
 package com.masary.anamasary.presentation.view;
 
-import com.masary.anamasary.presentation.model.UserModel;
+import com.masary.anamasary.presentation.model.EncryptionKeyModel;
 
 import java.util.Collection;
 
 /**
  * Interface representing a View in a model view presenter (MVP) pattern.
- * In this case is used as a view representing a list of {@link UserModel}.
+ * In this case is used as a view representing a list of {@link EncryptionKeyModel}.
  */
 public interface UserListView extends LoadDataView {
   /**
    * Render a user list in the UI.
    *
-   * @param userModelCollection The collection of {@link UserModel} that will be shown.
+   * @param encryptionKeyModelCollection The collection of {@link EncryptionKeyModel} that will be shown.
    */
-  void renderUserList(Collection<UserModel> userModelCollection);
+  void renderUserList(Collection<EncryptionKeyModel> encryptionKeyModelCollection);
 
   /**
-   * View a {@link UserModel} profile/details.
+   * View a {@link EncryptionKeyModel} profile/details.
    *
-   * @param userModel The user that will be shown.
+   * @param encryptionKeyModel The user that will be shown.
    */
-  void viewUser(UserModel userModel);
+  void viewUser(EncryptionKeyModel encryptionKeyModel);
 }

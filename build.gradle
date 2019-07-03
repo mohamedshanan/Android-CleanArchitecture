@@ -18,7 +18,7 @@ allprojects {
     androidVersionCode = 1
     androidVersionName = "1.0"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-    testApplicationId = 'com.ic_masary_logo.anamasary.presentation.test'
+    testApplicationId = 'com.masary_logo.anamasary.presentation.test'
   }
 }
 

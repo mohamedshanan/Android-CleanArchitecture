@@ -19,7 +19,7 @@ import android.content.Context;
 
 import com.masary.anamasary.domain.executor.PostExecutionThread;
 import com.masary.anamasary.domain.executor.ThreadExecutor;
-import com.masary.anamasary.domain.repository.UserRepository;
+import com.masary.anamasary.domain.repository.EncryptionKeyRepository;
 import com.masary.anamasary.presentation.internal.di.modules.ApplicationModule;
 import com.masary.anamasary.presentation.view.activity.BaseActivity;
 
@@ -39,5 +39,6 @@ public interface ApplicationComponent {
   Context context();
   ThreadExecutor threadExecutor();
   PostExecutionThread postExecutionThread();
-  UserRepository userRepository();
+
+    EncryptionKeyRepository encryptionKeyRepository();
 }

@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.masary.anamasary.data.net;
+package com.masary.anamasary.data.repository.datasource;
 
 import com.masary.anamasary.data.entity.EncryptionKeyEntity;
 import com.masary.anamasary.domain.EncryptionKey;
@@ -21,19 +21,13 @@ import com.masary.anamasary.domain.EncryptionKey;
 import io.reactivex.Observable;
 
 /**
- * RestApi for retrieving data from the network.
+ * Interface that represents a data store from where data is retrieved.
  */
-public interface RestApi {
-  String API_BASE_URL =
-          "https://raw.githubusercontent.com/anamasary/Sample-Data/master/Android-CleanArchitecture/";
-
-  /** Api url for getting all users */
-  String API_URL_GET_USER_LIST = API_BASE_URL + "users.json";
-  /** Api url for getting a user profile: Remember to concatenate id + 'json' */
-  String API_URL_GET_USER_DETAILS = API_BASE_URL + "user_";
+public interface EncryptionKeyDataStore {
 
   /**
-   * Retrieves an {@link Observable} which will emit a {@link EncryptionKey}.
+   * Get an {@link Observable} which will emit a {@link EncryptionKey} if  {@param verificationCode}
+   * is correct.
    *
    * @param verificationCode The verification code to check against.
    */

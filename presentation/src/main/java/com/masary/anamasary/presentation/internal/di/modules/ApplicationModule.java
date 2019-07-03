@@ -17,13 +17,13 @@ package com.masary.anamasary.presentation.internal.di.modules;
 
 import android.content.Context;
 
-import com.masary.anamasary.data.cache.UserCache;
-import com.masary.anamasary.data.cache.UserCacheImpl;
+import com.masary.anamasary.data.cache.EncryptionKeyCache;
+import com.masary.anamasary.data.cache.EncryptionKeyCacheImpl;
 import com.masary.anamasary.data.executor.JobExecutor;
-import com.masary.anamasary.data.repository.UserDataRepository;
+import com.masary.anamasary.data.repository.EncryptionKeyDataRepository;
 import com.masary.anamasary.domain.executor.PostExecutionThread;
 import com.masary.anamasary.domain.executor.ThreadExecutor;
-import com.masary.anamasary.domain.repository.UserRepository;
+import com.masary.anamasary.domain.repository.EncryptionKeyRepository;
 import com.masary.anamasary.presentation.AndroidApplication;
 import com.masary.anamasary.presentation.UIThread;
 
@@ -57,11 +57,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    UserCache provideUserCache(UserCacheImpl userCache) {
-    return userCache;
-  }
+    EncryptionKeyCache provideEncryptionKeyCache(EncryptionKeyCacheImpl keyCache) {
+        return keyCache;
+    }
 
-  @Provides @Singleton UserRepository provideUserRepository(UserDataRepository userDataRepository) {
-    return userDataRepository;
+    @Provides
+    @Singleton
+    EncryptionKeyRepository provideEncryptionKeyRepository(EncryptionKeyDataRepository keyDataRepository) {
+        return keyDataRepository;
   }
 }

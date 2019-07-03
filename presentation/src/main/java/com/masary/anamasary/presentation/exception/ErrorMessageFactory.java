@@ -18,7 +18,6 @@ package com.masary.anamasary.presentation.exception;
 import android.content.Context;
 
 import com.masary.anamasary.data.exception.NetworkConnectionException;
-import com.masary.anamasary.data.exception.UserNotFoundException;
 import com.masary.anamasary.presentation.R;
 
 /**
@@ -42,8 +41,8 @@ public class ErrorMessageFactory {
 
     if (exception instanceof NetworkConnectionException) {
       message = context.getString(R.string.exception_message_no_connection);
-    } else if (exception instanceof UserNotFoundException) {
-      message = context.getString(R.string.exception_message_user_not_found);
+    } else if (exception instanceof InvalidVerificationCodeException) {
+        message = context.getString(R.string.exception_invalid_code);
     }
 
     return message;

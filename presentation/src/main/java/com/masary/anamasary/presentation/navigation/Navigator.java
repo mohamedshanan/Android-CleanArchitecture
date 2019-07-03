@@ -18,8 +18,7 @@ package com.masary.anamasary.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import com.masary.anamasary.presentation.view.activity.UserDetailsActivity;
-import com.masary.anamasary.presentation.view.activity.UserListActivity;
+import com.masary.anamasary.presentation.view.activity.CodeVerificationActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,25 +35,13 @@ public class Navigator {
   }
 
   /**
-   * Goes to the user list screen.
-   *
-   * @param context A Context needed to open the destiny activity.
-   */
-  public void navigateToUserList(Context context) {
-    if (context != null) {
-      Intent intentToLaunch = UserListActivity.getCallingIntent(context);
-      context.startActivity(intentToLaunch);
-    }
-  }
-
-  /**
    * Goes to the user details screen.
    *
    * @param context A Context needed to open the destiny activity.
    */
-  public void navigateToUserDetails(Context context, int userId) {
+  public void navigateToCodeVerification(Context context) {
     if (context != null) {
-      Intent intentToLaunch = UserDetailsActivity.getCallingIntent(context, userId);
+        Intent intentToLaunch = CodeVerificationActivity.getCallingIntent(context);
       context.startActivity(intentToLaunch);
     }
   }
