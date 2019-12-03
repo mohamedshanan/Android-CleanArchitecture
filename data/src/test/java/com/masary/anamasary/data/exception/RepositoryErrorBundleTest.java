@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.masary.anamasary.data._repository.datasource;
-
-import com.masary.anamasary.data._cache.UserCache;
+package com.masary.anamasary.data.exception;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -28,30 +24,22 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DiskUserDataStoreTest {
+public class RepositoryErrorBundleTest {
 
-  private static final int FAKE_USER_ID = 11;
+  private RepositoryErrorBundle repositoryErrorBundle;
 
-  private DiskUserDataStore diskUserDataStore;
-
-  @Mock private UserCache mockUserCache;
-
-  @Rule public ExpectedException expectedException = ExpectedException.none();
+  @Mock private Exception mockException;
 
   @Before
   public void setUp() {
-    diskUserDataStore = new DiskUserDataStore(mockUserCache);
+    repositoryErrorBundle = new RepositoryErrorBundle(mockException);
   }
 
   @Test
-  public void testGetUserEntityListUnsupported() {
-    expectedException.expect(UnsupportedOperationException.class);
-    diskUserDataStore.userEntityList();
-  }
+  @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
+  public void testGetErrorMessageInteraction() {
+    repositoryErrorBundle.getErrorMessage();
 
-  @Test
-  public void testGetUserEntityDetailesFromCache() {
-    diskUserDataStore.userEntityDetails(FAKE_USER_ID);
-    verify(mockUserCache).get(FAKE_USER_ID);
+    verify(mockException).getMessage();
   }
 }

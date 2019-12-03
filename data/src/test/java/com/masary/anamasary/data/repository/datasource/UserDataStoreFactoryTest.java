@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.masary.anamasary.data._repository.datasource;
+package com.masary.anamasary.data.repository.datasource;
 
 import com.masary.anamasary.data.ApplicationTestCase;
-import com.masary.anamasary.data._cache.UserCache;
+import com.masary.anamasary.data.cache.EncryptionKeyCacheImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,41 +32,42 @@ import static org.mockito.Mockito.verify;
 
 public class UserDataStoreFactoryTest extends ApplicationTestCase {
 
-  private static final int FAKE_USER_ID = 11;
+  private static final String FAKE_KEY = "ABC123";
 
-  private UserDataStoreFactory userDataStoreFactory;
+  private EncryptionKeyDataStoreFactory dataStoreFactory;
 
-  @Mock private UserCache mockUserCache;
+  @Mock
+  private EncryptionKeyCacheImpl mockCache;
 
   @Before
   public void setUp() {
-    userDataStoreFactory = new UserDataStoreFactory(RuntimeEnvironment.application, mockUserCache);
+    dataStoreFactory = new EncryptionKeyDataStoreFactory(RuntimeEnvironment.application, mockCache);
   }
 
   @Test
   public void testCreateDiskDataStore() {
-    given(mockUserCache.isCached(FAKE_USER_ID)).willReturn(true);
-    given(mockUserCache.isExpired()).willReturn(false);
+    given(mockCache.isCached()).willReturn(true);
+    given(mockCache.isExpired()).willReturn(false);
 
-    UserDataStore userDataStore = userDataStoreFactory.create(FAKE_USER_ID);
+    EncryptionKeyDataStore dataStore = dataStoreFactory.create(FAKE_KEY);
 
-    assertThat(userDataStore, is(notNullValue()));
-    assertThat(userDataStore, is(instanceOf(DiskUserDataStore.class)));
+    assertThat(dataStore, is(notNullValue()));
+    assertThat(dataStore, is(instanceOf(EncryptionKeyDataStore.class)));
 
-    verify(mockUserCache).isCached(FAKE_USER_ID);
-    verify(mockUserCache).isExpired();
+    verify(mockCache).isCached();
+    verify(mockCache).isExpired();
   }
 
   @Test
   public void testCreateCloudDataStore() {
-    given(mockUserCache.isExpired()).willReturn(true);
-    given(mockUserCache.isCached(FAKE_USER_ID)).willReturn(false);
+    given(mockCache.isExpired()).willReturn(true);
+    given(mockCache.isCached()).willReturn(false);
 
-    UserDataStore userDataStore = userDataStoreFactory.create(FAKE_USER_ID);
+    EncryptionKeyDataStore dataStore = dataStoreFactory.create(FAKE_KEY);
 
-    assertThat(userDataStore, is(notNullValue()));
-    assertThat(userDataStore, is(instanceOf(CloudUserDataStore.class)));
+    assertThat(dataStore, is(notNullValue()));
+    assertThat(dataStore, is(instanceOf(CloudEncryptionKeyDataStore.class)));
 
-    verify(mockUserCache).isExpired();
+    verify(mockCache).isExpired();
   }
 }

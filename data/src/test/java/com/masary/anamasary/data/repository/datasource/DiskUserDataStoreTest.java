@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.masary.anamasary.data._exception;
+package com.masary.anamasary.data.repository.datasource;
+
+
+import com.masary.anamasary.data.cache.EncryptionKeyCacheImpl;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -24,22 +29,31 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RepositoryErrorBundleTest {
+public class DiskUserDataStoreTest {
 
-  private RepositoryErrorBundle repositoryErrorBundle;
+  private static final String FAKE_CODE = "ABC123";
 
-  @Mock private Exception mockException;
+  private DiskEncryptionKeyDataStore diskDataStore;
+
+  @Mock
+  private EncryptionKeyCacheImpl mockCache;
+
+  @Rule public ExpectedException expectedException = ExpectedException.none();
 
   @Before
   public void setUp() {
-    repositoryErrorBundle = new RepositoryErrorBundle(mockException);
+    diskDataStore = new DiskEncryptionKeyDataStore(mockCache);
   }
 
   @Test
-  @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
-  public void testGetErrorMessageInteraction() {
-    repositoryErrorBundle.getErrorMessage();
+  public void testGetUserEntityListUnsupported() {
+    expectedException.expect(UnsupportedOperationException.class);
+    diskDataStore.verifyCode(FAKE_CODE);
+  }
 
-    verify(mockException).getMessage();
+  @Test
+  public void testGetUserEntityDetailesFromCache() {
+    diskDataStore.verifyCode(FAKE_CODE);
+    verify(mockCache).get();
   }
 }

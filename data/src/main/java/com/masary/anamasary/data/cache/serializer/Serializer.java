@@ -28,7 +28,9 @@ public class Serializer {
 
   private final Gson gson = new Gson();
 
-  @Inject Serializer() {}
+    @Inject
+    public Serializer() {
+    }
 
   /**
    * Serialize an object to Json.

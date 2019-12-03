@@ -55,8 +55,8 @@ public class EncryptionKeyCacheImpl implements EncryptionKeyCache {
    * @param fileManager {@link FileManager} for saving serialized objects to the file system.
    */
   @Inject
-  EncryptionKeyCacheImpl(Context context, Serializer serializer,
-                         FileManager fileManager, ThreadExecutor executor) {
+  public EncryptionKeyCacheImpl(Context context, Serializer serializer,
+                                FileManager fileManager, ThreadExecutor executor) {
     if (context == null || serializer == null || fileManager == null || executor == null) {
       throw new IllegalArgumentException("Invalid null parameter");
     }
